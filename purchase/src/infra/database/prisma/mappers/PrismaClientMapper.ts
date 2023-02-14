@@ -20,7 +20,6 @@ export class PrimaClientMapper {
       email: raw.email,
       password: raw.password,
       type: raw.type,
-      createdAt: raw.createdAt
     });
   }
 }

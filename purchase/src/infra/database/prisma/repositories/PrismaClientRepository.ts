@@ -5,6 +5,18 @@ import { PrimaClientMapper } from "../mappers/PrismaClientMapper";
 import { prisma } from "..";
 
 export class PrismaClientRepository implements ClientRepository {
+  async findById(id: string): Promise<Client | null> {
+    const client = await prisma.client.findFirst({
+      where: { id },
+    });
+
+    if (!client) {
+      return client;
+    }
+
+    return PrimaClientMapper.toDomain(client);
+  }
+
   async findByEmail(email: string): Promise<Client | null> {
     const client = await prisma.client.findFirst({
       where: { email },

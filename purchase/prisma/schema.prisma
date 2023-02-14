@@ -11,12 +11,24 @@ datasource db {
 }
 
 model Client {
-  id        String   @id @default(uuid())
-  name      String
-  email     String
-  type      String
-  password  String
-  createdAt DateTime @default(now())
+  id       String @id @default(uuid())
+  name     String
+  email    String
+  type     String
+  password String
+
+  purchases Purchase[]
 
   @@map("clients")
+}
+
+model Purchase {
+  id        String   @id @default(uuid())
+  total     Float
+  clientId  String
+  createdAt DateTime @default(now())
+
+  client Client @relation(fields: [clientId], references: [id])
+
+  @@map("purchases")
 }
