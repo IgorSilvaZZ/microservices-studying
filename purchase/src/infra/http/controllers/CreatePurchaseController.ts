@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 import { CreatePurchaseUseCase } from "../../../app/useCases/purchase/CreatePurchaseUseCase";
 
-export class CratePurchaseController {
+export class CreatePurchaseController {
   constructor(private createPurchaseUseCase: CreatePurchaseUseCase) {}
 
   async handle(req: Request, res: Response) {
