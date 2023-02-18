@@ -11,6 +11,16 @@ export class PrismaPurchaseRepository implements PurchaseRepository {
     return purchases.map(PrismaPurchaseMapper.toDomain);
   }
 
+  async listPurchasesClient(clientId: string): Promise<Purchase[]> {
+    const purchasesClient = await prisma.purchase.findMany({
+      where: {
+        clientId,
+      },
+    });
+
+    return purchasesClient.map(PrismaPurchaseMapper.toDomain);
+  }
+
   async create(purchase: Purchase): Promise<void> {
     const purchaseRaw = PrismaPurchaseMapper.toPrisma(purchase);
 

@@ -5,7 +5,7 @@ import { CreatePurchaseUseCase } from "../../../app/useCases/purchase/CreatePurc
 export class CreatePurchaseController {
   constructor(private createPurchaseUseCase: CreatePurchaseUseCase) {}
 
-  async handle(req: Request, res: Response) {
+  async handle(req: Request, res: Response): Promise<Response> {
     const { total, clientId } = req.body;
 
     try {

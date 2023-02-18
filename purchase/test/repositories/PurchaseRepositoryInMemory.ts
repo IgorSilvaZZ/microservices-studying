@@ -8,6 +8,14 @@ export class PurchaseRepositoryInMemory implements PurchaseRepository {
     return this.purchases;
   }
 
+  async listPurchasesClient(clientId: string): Promise<Purchase[]> {
+    const purchasesClient = this.purchases.filter(
+      (purchase) => purchase.clientId === clientId
+    );
+
+    return purchasesClient;
+  }
+
   async create(purchase: Purchase): Promise<void> {
     this.purchases.push(purchase);
   }
