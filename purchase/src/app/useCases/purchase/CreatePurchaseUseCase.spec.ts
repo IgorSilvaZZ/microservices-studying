@@ -2,7 +2,6 @@ import { describe, expect, it, beforeEach } from "vitest";
 import { ClientRepositoryInMemory } from "../../../../test/repositories/ClientRepositoryInMemory";
 import { PurchaseRepositoryInMemory } from "../../../../test/repositories/PurchaseRepositoryInMemory";
 import { Client } from "../../entities/Client";
-import { Purchase } from "../../entities/Purchase";
 import { CreatePurchaseUseCase } from "./CreatePurchaseUseCase";
 
 let clientRepositoryInMemory: ClientRepositoryInMemory;

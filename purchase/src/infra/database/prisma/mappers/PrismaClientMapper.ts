@@ -1,4 +1,4 @@
-import { Client as RawClient} from "@prisma/client";
+import { Client as RawClient } from "@prisma/client";
 
 import { Client } from "../../../../app/entities/Client";
 
@@ -10,7 +10,6 @@ export class PrimaClientMapper {
       email: client.email,
       password: client.password,
       type: client.type,
-      createdAt: client.createdAt,
     };
   }
 

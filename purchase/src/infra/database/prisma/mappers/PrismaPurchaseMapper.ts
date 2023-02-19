@@ -8,6 +8,7 @@ export class PrismaPurchaseMapper {
       id: purchase.id,
       clientId: purchase.clientId,
       total: purchase.total,
+      approved: purchase.approved,
       createdAt: purchase.createdAt,
     };
   }
@@ -16,6 +17,7 @@ export class PrismaPurchaseMapper {
     return new Purchase({
       total: raw.total,
       clientId: raw.clientId,
+      approved: raw.approved,
       createdAt: raw.createdAt,
     });
   }

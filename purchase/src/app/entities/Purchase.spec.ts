@@ -6,6 +6,7 @@ describe("Purchase", () => {
     const purchase = new Purchase({
       clientId: "test-client-id",
       total: 25000,
+      approved: false,
     });
 
     expect(purchase).toBeTruthy();

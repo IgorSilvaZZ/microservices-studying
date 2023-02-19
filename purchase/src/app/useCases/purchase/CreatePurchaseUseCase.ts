@@ -23,6 +23,7 @@ export class CreatePurchaseUseCase {
     const purchase = new Purchase({
       clientId,
       total,
+      approved: false,
     });
 
     await this.purchaseRepositoru.create(purchase);
