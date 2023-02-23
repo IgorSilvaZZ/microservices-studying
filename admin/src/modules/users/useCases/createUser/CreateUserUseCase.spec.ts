@@ -1,4 +1,5 @@
-import { UsersRepositoryInMemory } from "../../infra/typeorm/repositories/in-memory/UsersRepositoryInMemory";
+import { AppErrors } from "../../../../shared/errors/AppErrors";
+import { UsersRepositoryInMemory } from "../../repositories/in-memory/UsersRepositoryInMemory";
 import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
 
 let usersRepositoryInMemory: UsersRepositoryInMemory;
@@ -19,5 +20,23 @@ describe("Create a user", () => {
         role: "OPR",
       });
     }).toBeTruthy();
+  });
+
+  it("should not be able create user already exists", () => {
+    expect(async () => {
+      await createUserUseCase.execute({
+        name: "Igor Admin",
+        email: "igor@admin.com",
+        password: "123",
+        role: "OPR",
+      });
+
+      await createUserUseCase.execute({
+        name: "Igor Admin",
+        email: "igor@admin.com",
+        password: "123",
+        role: "OPR",
+      });
+    }).rejects.toEqual(new AppErrors("User Already Exists!"));
   });
 });

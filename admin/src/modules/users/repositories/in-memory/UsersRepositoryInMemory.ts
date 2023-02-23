@@ -1,9 +1,9 @@
-import { ICreateUserDTO } from "../../../../dtos/ICreateUserDTO";
-import { User } from "../../entities/User";
+import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
+import { User } from "../../infra/typeorm/entities/User";
 import { IUsersRepository } from "../IUsersRepository";
 
 export class UsersRepositoryInMemory implements IUsersRepository {
-  users: User[];
+  users: User[] = [];
 
   async create(data: ICreateUserDTO): Promise<void> {
     const user = new User();

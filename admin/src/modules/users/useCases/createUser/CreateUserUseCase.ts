@@ -1,7 +1,7 @@
 import { hash } from "bcryptjs";
 
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { IUsersRepository } from "../../infra/typeorm/repositories/IUsersRepository";
+import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 import { AppErrors } from "../../../../shared/errors/AppErrors";
 
