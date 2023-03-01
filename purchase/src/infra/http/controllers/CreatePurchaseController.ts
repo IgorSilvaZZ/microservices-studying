@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 
 import { CreatePurchaseUseCase } from "../../../app/useCases/purchase/CreatePurchaseUseCase";
-import { PurchasesWorker } from "../../rabbitmq/workers/PurchasesWorker";
+import { MessageSender } from "../../microservice/rabbitmq/MessageSender";
 
 export class CreatePurchaseController {
   constructor(
     private createPurchaseUseCase: CreatePurchaseUseCase,
-    private purchaseWorker: PurchasesWorker
+    private messageSender: MessageSender
   ) {}
 
   async handle(req: Request, res: Response): Promise<Response> {
@@ -15,9 +15,9 @@ export class CreatePurchaseController {
     try {
       await this.createPurchaseUseCase.execute({ total, clientId });
 
-      const messageParsed = JSON.stringify({ total, clientId });
+      const messageSenderParsed = JSON.stringify({ total, clientId });
 
-      await this.purchaseWorker.publish("purchases", messageParsed);
+      await this.messageSender.send(messageSenderParsed);
 
       return res.status(201).send();
     } catch (error: any) {

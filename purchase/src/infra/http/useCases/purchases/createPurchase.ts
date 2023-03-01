@@ -1,7 +1,7 @@
 import { CreatePurchaseUseCase } from "../../../../app/useCases/purchase/CreatePurchaseUseCase";
 import { PrismaClientRepository } from "../../../database/prisma/repositories/PrismaClientRepository";
 import { PrismaPurchaseRepository } from "../../../database/prisma/repositories/PrismaPurchaseRepository";
-import { PurchasesWorker } from "../../../rabbitmq/workers/PurchasesWorker";
+import { createMessageSender } from "../../../microservice/rabbitmq";
 import { CreatePurchaseController } from "../../controllers/CreatePurchaseController";
 
 export default (): CreatePurchaseController => {
@@ -13,11 +13,11 @@ export default (): CreatePurchaseController => {
     clientRepository
   );
 
-  const purchaseWorker = new PurchasesWorker();
+  const messageSender = createMessageSender("purchases");
 
   const createPurchaseController = new CreatePurchaseController(
     createPurchaseUseCase,
-    purchaseWorker
+    messageSender
   );
 
   return createPurchaseController;
