@@ -1,7 +1,6 @@
 import {
   Channel,
   Connection,
-  Message,
   connect as connectRabbit,
 } from "amqplib";
 

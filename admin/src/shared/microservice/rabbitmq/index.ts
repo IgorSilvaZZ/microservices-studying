@@ -15,11 +15,11 @@ export const getChannel = (): Channel => {
 };
 
 export function createMessageSender(queue: string): MessageSender {
-  const channel = messageBroker.getChannel();
+  const channel = getChannel();
   return new MessageSender(channel, queue);
 }
 
 export function createMessageReceiver(queue: string): MessageReceiver {
-  const channel = messageBroker.getChannel();
+  const channel = getChannel();
   return new MessageReceiver(channel, queue);
 }
