@@ -13,7 +13,7 @@ export class CreatePurchaseController {
     const { total, clientId } = req.body;
 
     try {
-      // await this.createPurchaseUseCase.execute({ total, clientId });
+      await this.createPurchaseUseCase.execute({ total, clientId });
 
       const messageSenderParsed = JSON.stringify({ total, clientId });
 

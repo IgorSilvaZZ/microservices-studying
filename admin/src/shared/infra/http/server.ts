@@ -4,7 +4,9 @@ import express from "express";
 
 import "../typeorm/index";
 
-import { connect, createMessageReceiver } from "../../microservice/rabbitmq";
+import { connect } from "../../microservice/rabbitmq";
+
+import createPurchase from "../../../modules/purchases/useCases/createPurchase";
 
 import { routes } from "./routes";
 
@@ -13,11 +15,7 @@ async function start() {
 
   await connect("amqp://localhost:5672");
 
-  const messageReceiver = createMessageReceiver("purchases");
-
-  messageReceiver.receive((message) => {
-    console.log(message);
-  });
+  createPurchase();
 
   server.use(express.json());
   server.use(routes);
