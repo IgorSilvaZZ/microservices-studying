@@ -15,7 +15,7 @@ export async function ensureAutheticated(
   const { authorization } = req.headers;
 
   if (!authorization) {
-    throw new AppErrors("Invalid Token!!");
+    throw new Error("Invalid Token!!");
   }
 
   const [, token] = authorization.split(" ");
@@ -31,7 +31,7 @@ export async function ensureAutheticated(
     const usersExists = await usersRepository.findById(user_id);
 
     if (!usersExists) {
-      throw new AppErrors("User not exists!");
+      throw new Error("User not exists!");
     }
 
     req.user = {
@@ -40,6 +40,6 @@ export async function ensureAutheticated(
 
     next();
   } catch (error) {
-    throw new AppErrors("Invalid Token!!");
+    throw new Error("Invalid Token!!");
   }
 }

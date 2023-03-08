@@ -16,7 +16,7 @@
     "zod": "^3.20.6"
   },
   "scripts": {
-    "dev": "tsnd ./src/shared/infra/http/server.ts",
+    "dev": "tsnd --inspect --transpile-only ./src/shared/infra/http/server.ts",
     "typeorm": "tsnd ./node_modules/typeorm/cli",
     "test": "jest --runInBand --detectOpenHandles"
   },
