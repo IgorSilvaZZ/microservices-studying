@@ -10,6 +10,12 @@ export class PurchasesRepository implements IPurchasesRepository {
     this.repository = getRepository(Purchase);
   }
 
+  async findById(purchaseId: string): Promise<Purchase> {
+    const purchase = await this.repository.findOne(purchaseId);
+
+    return purchase;
+  }
+
   async list(): Promise<Purchase[]> {
     const purchasesAvailable = await this.repository.find({
       where: {
@@ -20,9 +26,21 @@ export class PurchasesRepository implements IPurchasesRepository {
     return purchasesAvailable;
   }
 
-  async create(data: ICreatePurchaseDTO): Promise<void> {
+  async create(data: ICreatePurchaseDTO): Promise<Purchase> {
     const purchase = this.repository.create(data);
 
     await this.repository.save(purchase);
+
+    return purchase;
+  }
+
+  async approved(purchaseId: string): Promise<Purchase> {
+    const purchase = await this.repository.findOne(purchaseId);
+
+    purchase.approved = true;
+
+    await this.repository.save(purchase);
+
+    return purchase;
   }
 }
