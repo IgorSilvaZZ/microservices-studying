@@ -49,7 +49,7 @@ export class Purchase {
   }
 
   public set approved(approved: boolean) {
-    this.approved = approved;
+    this.props.approved = approved;
   }
 
   public get createdAt() {

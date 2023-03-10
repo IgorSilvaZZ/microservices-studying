@@ -8,6 +8,10 @@ export class PurchaseRepositoryInMemory implements PurchaseRepository {
     return this.purchases;
   }
 
+  async findById(purchaseId: string): Promise<Purchase | null> {
+    return this.purchases.find((purchase) => purchase.id === purchaseId);
+  }
+
   async listPurchasesClient(clientId: string): Promise<Purchase[]> {
     const purchasesClient = this.purchases.filter(
       (purchase) => purchase.clientId === clientId
@@ -18,5 +22,15 @@ export class PurchaseRepositoryInMemory implements PurchaseRepository {
 
   async create(purchase: Purchase): Promise<void> {
     this.purchases.push(purchase);
+  }
+
+  async approvedPurchase(purchaseId: string): Promise<Purchase> {
+    const purchase = this.purchases.find(
+      (purchase) => purchase.id === purchaseId
+    );
+
+    purchase.approved = true;
+
+    return purchase;
   }
 }

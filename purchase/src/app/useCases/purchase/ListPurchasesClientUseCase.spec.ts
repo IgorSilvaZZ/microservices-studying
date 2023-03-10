@@ -33,11 +33,13 @@ describe("List Purchases Clients", () => {
     const purchaseOne = new Purchase({
       clientId: client.id,
       total: 2500,
+      approved: false,
     });
 
     const purchaseTwo = new Purchase({
       clientId: client.id,
       total: 2500,
+      approved: false,
     });
 
     await purchaseRepositoryInMemory.create(purchaseOne);
